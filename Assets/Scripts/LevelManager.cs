@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void LoadLevel(string levelName)
     {
         print("Loading level " + levelName);
@@ -12,6 +17,14 @@ public class LevelManager : MonoBehaviour {
         SceneManager.LoadScene(levelName);
     }
 
+    public void BrickDestroyed()
+    {
+        //Calling static variable breakableCOunt
+        if (Brick.breakableCount <= 0)
+        {
+            LoadNextLevel();
+        }
+    }
     public void QuitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
